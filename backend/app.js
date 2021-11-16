@@ -6,7 +6,7 @@ const con = require("./config/db");
 const dotenv = require("dotenv");
 const cookieParser = require("cookie-parser");
 const port = process.env.PORT || 4000;
-const cors = require('cors');
+const cors = require("cors");
 
 const app = express();
 dotenv.config("../.env");
@@ -21,12 +21,14 @@ app.use(
 	})
 );
 app.use(cookieParser());
-const whiteList = ['localhost:3000', 'locahost:3001']
-app.use(cors({
-	origin: whiteList,
-}))
+const whiteList = ["localhost:3000", "localhost:3001"];
+app.use(
+	cors({
+		origin: whiteList,
+	})
+);
 
-app.use('/api', require('./routes/authentication'))
+app.use("/api", require("./routes/authentication"));
 
 app.listen(port, () => {
 	console.log(`Server started on port ${port}`);

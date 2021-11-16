@@ -35,13 +35,12 @@ exports.loginController = (req, res) => {
 };
 
 exports.registerController = (req, res) => {
-	console.log(req.body);
 	const { firstName, lastName, userName, email, password } = req.body;
 	let sql = "SELECT * FROM user WHERE email = '" + email + "'";
 	con.query(sql, (err, result) => {
 		if (err) throw err;
 		if (result.length > 0) {
-			res.json({
+			res.status(400).json({
 				error: true,
 				message: "Email already exists",
 			});
