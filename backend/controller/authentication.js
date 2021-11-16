@@ -25,15 +25,14 @@ exports.loginController = (req, res) => {
 				user: user,
 				token,
 			});
-
 		} else {
 			res.status(401).json({
 				error: true,
-				message: "Invalid credentials"
+				message: "Invalid credentials",
 			});
 		}
 	});
-}
+};
 
 exports.registerController = (req, res) => {
 	console.log(req.body);
@@ -42,19 +41,30 @@ exports.registerController = (req, res) => {
 	con.query(sql, (err, result) => {
 		if (err) throw err;
 		if (result.length > 0) {
-			res.status(401).json({
+			res.json({
 				error: true,
-				message: "Email already exists"
+				message: "Email already exists",
 			});
 		} else {
-			let sql = "INSERT INTO user (username,fname,lname, email, password) VALUES ('" + userName + "','" + firstName + "','" + lastName + "', '" + email + "', '" + password + "')";
+			let sql =
+				"INSERT INTO user (username,fname,lname, email, password) VALUES ('" +
+				userName +
+				"','" +
+				firstName +
+				"','" +
+				lastName +
+				"', '" +
+				email +
+				"', '" +
+				password +
+				"')";
 			con.query(sql, (err, result) => {
 				if (err) throw err;
 				res.status(200).json({
 					error: false,
-					message: "User registered successfully"
+					message: "User registered successfully",
 				});
 			});
 		}
 	});
-}
+};
